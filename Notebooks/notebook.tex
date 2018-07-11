@@ -1,0 +1,1694 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{mlp\_with\_batchnorm}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{torch}
+        \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{nn} \PY{k}{as} \PY{n+nn}{nn}
+        \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{optim} \PY{k}{as} \PY{n+nn}{optim}
+        \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{nn}\PY{n+nn}{.}\PY{n+nn}{functional} \PY{k}{as} \PY{n+nn}{F}
+        \PY{k+kn}{from} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{data} \PY{k}{import} \PY{n}{DataLoader}\PY{p}{,} \PY{n}{Dataset}
+        
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{externals} \PY{k}{import} \PY{n}{joblib}
+        \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{Counter}
+        
+        \PY{k+kn}{import} \PY{n+nn}{pathlib} \PY{k}{as} \PY{n+nn}{plib}
+        \PY{k+kn}{import} \PY{n+nn}{pdb}
+        \PY{k+kn}{import} \PY{n+nn}{types}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{imports}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{val} \PY{o+ow}{in} \PY{n+nb}{globals}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{val}\PY{p}{,} \PY{n}{types}\PY{o}{.}\PY{n}{ModuleType}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{yield} \PY{n}{val}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}Globals}
+        \PY{n}{ROOT} \PY{o}{=} \PY{n}{plib}\PY{o}{.}\PY{n}{Path}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/root/fastai/Playground/PytorchStarter/}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{nRuns} \PY{o}{=} \PY{l+m+mi}{5} \PY{c+c1}{\PYZsh{}number of test runs per unit}
+        \PY{n}{RSEED} \PY{o}{=} \PY{l+m+mi}{11}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{cd} \PY{err}{\PYZdl{}}\PY{n}{ROOT}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/root/fastai/Playground/PytorchStarter
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} To list all packages imported}
+        \PY{n+nb}{list}\PY{p}{(}\PY{n}{imports}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} ['builtins',
+         'builtins',
+         'torch',
+         'torch.nn',
+         'torch.optim',
+         'torch.nn.functional',
+         'numpy',
+         'matplotlib.pyplot',
+         'pandas',
+         'sklearn.externals.joblib',
+         'pathlib',
+         'pdb',
+         'types']
+\end{Verbatim}
+            
+    \hypertarget{load-cancer-dataset-binary-classification}{%
+\subsubsection{Load cancer dataset (binary
+classification)}\label{load-cancer-dataset-binary-classification}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k}{import} \PY{n}{load\PYZus{}breast\PYZus{}cancer}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{cancer\PYZus{}xy} \PY{o}{=} \PY{n}{load\PYZus{}breast\PYZus{}cancer}\PY{p}{(}\PY{p}{)}
+        \PY{n}{cancer\PYZus{}x} \PY{o}{=} \PY{n}{cancer\PYZus{}xy}\PY{o}{.}\PY{n}{data}
+        \PY{n}{cancer\PYZus{}y} \PY{o}{=} \PY{n}{cancer\PYZus{}xy}\PY{o}{.}\PY{n}{target}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{cancer\PYZus{}x}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{cancer\PYZus{}y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{classes: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{cancer\PYZus{}y}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(569, 30) (569,)
+classes:  [0 1]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{cancer\PYZus{}x}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}       0      1       2       3        4        5       6        7       8   \textbackslash{}
+        0  17.99  10.38  122.80  1001.0  0.11840  0.27760  0.3001  0.14710  0.2419   
+        1  20.57  17.77  132.90  1326.0  0.08474  0.07864  0.0869  0.07017  0.1812   
+        2  19.69  21.25  130.00  1203.0  0.10960  0.15990  0.1974  0.12790  0.2069   
+        3  11.42  20.38   77.58   386.1  0.14250  0.28390  0.2414  0.10520  0.2597   
+        4  20.29  14.34  135.10  1297.0  0.10030  0.13280  0.1980  0.10430  0.1809   
+        
+                9    {\ldots}        20     21      22      23      24      25      26  \textbackslash{}
+        0  0.07871   {\ldots}     25.38  17.33  184.60  2019.0  0.1622  0.6656  0.7119   
+        1  0.05667   {\ldots}     24.99  23.41  158.80  1956.0  0.1238  0.1866  0.2416   
+        2  0.05999   {\ldots}     23.57  25.53  152.50  1709.0  0.1444  0.4245  0.4504   
+        3  0.09744   {\ldots}     14.91  26.50   98.87   567.7  0.2098  0.8663  0.6869   
+        4  0.05883   {\ldots}     22.54  16.67  152.20  1575.0  0.1374  0.2050  0.4000   
+        
+               27      28       29  
+        0  0.2654  0.4601  0.11890  
+        1  0.1860  0.2750  0.08902  
+        2  0.2430  0.3613  0.08758  
+        3  0.2575  0.6638  0.17300  
+        4  0.1625  0.2364  0.07678  
+        
+        [5 rows x 30 columns]
+\end{Verbatim}
+            
+    Define cancer dataset, dataloader
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{class} \PY{n+nc}{CancerDataset}\PY{p}{(}\PY{n}{Dataset}\PY{p}{)}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{xy}\PY{p}{,} \PY{n}{ids}\PY{p}{,} \PY{n}{transform}\PY{o}{=}\PY{k+kc}{None} \PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ids} \PY{o}{=} \PY{n}{ids}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{len} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{ids}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data} \PY{o}{=} \PY{n}{xy}\PY{o}{.}\PY{n}{data}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{targets} \PY{o}{=} \PY{n}{xy}\PY{o}{.}\PY{n}{target}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{transform} \PY{o}{=} \PY{n}{transform}
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}len\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{len}
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}getitem\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{idx}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Returns a sample = [data[idx], targets[idx], idx]\PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n}{ID} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ids}\PY{p}{[}\PY{n}{idx}\PY{p}{]}
+                \PY{n}{sample} \PY{o}{=} \PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{n}{ID}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{targets}\PY{p}{[}\PY{n}{ID}\PY{p}{]}\PY{p}{,} \PY{n}{idx}\PY{p}{]}
+                
+                \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{transform}\PY{p}{:}
+                    \PY{n}{sample} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{sample}\PY{p}{)}
+                \PY{k}{return} \PY{n}{sample}
+\end{Verbatim}
+
+
+    Divide the indices into train, dev, test
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} cdataset = CancerDataset(cancer\PYZus{}xy, )}
+\end{Verbatim}
+
+
+    \hypertarget{load-lunacsvdataset-new}{%
+\subsubsection{Load LunaCsvDataset
+{[}NEW{]}}\label{load-lunacsvdataset-new}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} import sys,os}
+         \PY{c+c1}{\PYZsh{} sys.path.append(os.path.abspath(\PYZdq{}../Scripts/\PYZdq{}))}
+         \PY{c+c1}{\PYZsh{} from data\PYZus{}helpers import LunaCsvDataset, LunaPickleDataset}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{class} \PY{n+nc}{LunaCsvDataset}\PY{p}{(}\PY{n}{Dataset}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{csv\PYZus{}file}\PY{p}{,} \PY{n}{root\PYZus{}dir}\PY{p}{,} \PY{n}{transform}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}todo: add ids, modify \PYZus{}\PYZus{}len\PYZus{}\PYZus{}}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        \PYZhy{} csv\PYZus{}file (string): path to the csv file}
+         \PY{l+s+sd}{        \PYZhy{} root\PYZus{}dir (string or pathlib.Path object): directory with all the images}
+         \PY{l+s+sd}{        \PYZhy{} transform (callable, optional): optional transform to be applied to a sample}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{all\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{csv\PYZus{}file}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Filter out fruad datapoints}
+                 \PY{n}{is\PYZus{}not\PYZus{}fraud} \PY{o}{=} \PY{p}{[}\PY{k+kc}{False} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fraud}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{all\PYZus{}data}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{else} \PY{k+kc}{True} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{all\PYZus{}data}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+                 \PY{n}{all\PYZus{}data} \PY{o}{=} \PY{n}{all\PYZus{}data}\PY{p}{[}\PY{n}{is\PYZus{}not\PYZus{}fraud}\PY{p}{]}        
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{all\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} 
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{target} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{all\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{root\PYZus{}dir} \PY{o}{=} \PY{n}{root\PYZus{}dir}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{transform} \PY{o}{=} \PY{n}{transform}
+             \PY{c+c1}{\PYZsh{}todo}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}len\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}getitem\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{idx}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{returns a sample of format (feature 1,...,featureD, class)}\PY{l+s+s2}{\PYZdq{}}
+                 \PY{k}{return} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{n}{idx}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{target}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}todo}
+             \PY{k}{def} \PY{n+nf}{set\PYZus{}label\PYZus{}dict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{new\PYZus{}dict}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{label\PYZus{}dict} \PY{o}{=} \PY{n}{new\PYZus{}dict}
+         
+         \PY{k}{class} \PY{n+nc}{LunaPickleDataset}\PY{p}{(}\PY{n}{Dataset}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{pk\PYZus{}file}\PY{p}{,} \PY{n}{ids}\PY{p}{,} \PY{n}{root\PYZus{}dir}\PY{p}{,} \PY{n}{transform}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        \PYZhy{} pk\PYZus{}file (string): path to the pickled file}
+         \PY{l+s+sd}{        \PYZhy{} root\PYZus{}dir (string): directory with all the images}
+         \PY{l+s+sd}{        \PYZhy{} transform (callable, optional): optional transform to be applied to a sample}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{all\PYZus{}data} \PY{o}{=} \PY{n}{joblib}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{pk\PYZus{}file}\PY{p}{)} 
+         \PY{c+c1}{\PYZsh{}         is\PYZus{}not\PYZus{}fraud = [False if \PYZsq{}Fraud\PYZsq{} in all\PYZus{}data.state[i] else True for i in range(len(all\PYZus{}data))]}
+         \PY{c+c1}{\PYZsh{}         all\PYZus{}data = all\PYZus{}data[is\PYZus{}not\PYZus{}fraud]}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{all\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+                                     \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)} \PY{c+c1}{\PYZsh{} for compatibility with torch.FloatTensor}
+         \PY{c+c1}{\PYZsh{}         self.label\PYZus{}dict = \PYZob{}\PYZsq{}KGB\PYZsq{}:0, \PYZsq{}Cracked\PYZsq{}:1, \PYZsq{}Repaired\PYZsq{}:2, \PYZsq{}NoPSA\PYZsq{}:0, \PYZcb{}}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{targets} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{all\PYZus{}data}\PY{o}{.}\PY{n}{state}\PY{p}{,} 
+                                        \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{)}
+             
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ids} \PY{o}{=} \PY{n}{ids}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{len} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ids}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{root\PYZus{}dir} \PY{o}{=} \PY{n}{root\PYZus{}dir}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{transform} \PY{o}{=} \PY{n}{transform}
+                 
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}len\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{len}
+             
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}getitem\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{idx}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{returns a sample of format [ [feature 1,...,featureD], target, idx]}\PY{l+s+s2}{\PYZdq{}}
+                 \PY{n}{ID} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ids}\PY{p}{[}\PY{n}{idx}\PY{p}{]}
+                 \PY{n}{sample} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{n}{ID}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{targets}\PY{p}{[}\PY{n}{ID}\PY{p}{]}\PY{p}{,} \PY{n}{idx}\PY{p}{)}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{transform}\PY{p}{:}
+                     \PY{n}{sample} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{sample}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{sample}
+\end{Verbatim}
+
+
+    \hypertarget{load-normalized-kgb-repaired-dataset}{%
+\subsubsection{Load normalized kgb-repaired
+dataset}\label{load-normalized-kgb-repaired-dataset}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{fpath} \PY{o}{=} \PY{n}{ROOT}\PY{o}{/}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/DataMatrix/D\PYZus{}rr\PYZus{}rrr\PYZus{}kgb\PYZus{}badrepair\PYZus{}scaled\PYZus{}binary.pkl}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{d} \PY{o}{=} \PY{n}{joblib}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{ROOT}\PY{o}{/}\PY{n}{fpath}\PY{p}{)}
+         \PY{n}{dataset} \PY{o}{=} \PY{n}{LunaPickleDataset}\PY{p}{(}\PY{n}{fpath}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{d}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{root\PYZus{}dir}\PY{o}{=}\PY{n}{ROOT}\PY{p}{)} \PY{c+c1}{\PYZsh{}load entire dataset}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Loaded Luna data with ONLY kgb and badrepair info}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data and target sizes: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{dataset}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{dataset}\PY{o}{.}\PY{n}{targets}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Labels: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{dataset}\PY{o}{.}\PY{n}{targets}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}0: KGB or NoPSA, 1: BadRepair}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        FileNotFoundError                         Traceback (most recent call last)
+
+        <ipython-input-14-d9d9af699598> in <module>()
+          1 fpath = ROOT/'Data/DataMatrix/D\_rr\_rrr\_kgb\_badrepair\_scaled\_binary.pkl'
+    ----> 2 d = joblib.load(ROOT/fpath)
+          3 dataset = LunaPickleDataset(fpath, range(len(d)), root\_dir=ROOT) \#load entire dataset
+          4 print("Loaded Luna data with ONLY kgb and badrepair info")
+          5 print("data and target sizes: ", dataset.data.shape, dataset.targets.shape)
+
+
+        \textasciitilde{}/anaconda3/envs/fastai/lib/python3.6/site-packages/sklearn/externals/joblib/numpy\_pickle.py in load(filename, mmap\_mode)
+        568             obj = \_unpickle(fobj)
+        569     else:
+    --> 570         with open(filename, 'rb') as f:
+        571             with \_read\_fileobject(f, filename, mmap\_mode) as fobj:
+        572                 if isinstance(fobj, \_basestring):
+
+
+        FileNotFoundError: [Errno 2] No such file or directory: '/root/fastai/Playground/PytorchStarter/Data/DataMatrix/D\_rr\_rrr\_kgb\_badrepair\_scaled\_binary.pkl'
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mean: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{d}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{std: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{d}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{d}\PY{p}{;}
+\end{Verbatim}
+
+
+    \hypertarget{or-test-with-cancer-dataset}{%
+\subsubsection{Or, test with cancer
+dataset}\label{or-test-with-cancer-dataset}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{dataset} \PY{o}{=} \PY{n}{CancerDataset}\PY{p}{(}\PY{n}{cancer\PYZus{}xy}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{cancer\PYZus{}xy}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{first-partition-the-dataset-into-train-dev-test-sets}{%
+\paragraph{First, partition the dataset into train, dev, test
+sets}\label{first-partition-the-dataset-into-train-dev-test-sets}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split} 
+         \PY{n}{labels} \PY{o}{=} \PY{n}{dataset}\PY{o}{.}\PY{n}{targets}
+         \PY{n}{indices} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{labels}\PY{p}{)}\PY{p}{)}
+         \PY{n}{train\PYZus{}dev\PYZus{}ids}\PY{p}{,} \PY{n}{test\PYZus{}ids} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{indices}\PY{p}{,}
+                                                 \PY{n}{stratify}\PY{o}{=}\PY{n}{labels}\PY{p}{,}
+                                                 \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} 
+                                                 \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{RSEED}\PY{p}{)} \PY{c+c1}{\PYZsh{}stratified }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{print\PYZus{}counts}\PY{p}{(}\PY{n}{indices}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{categories}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}todo}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}check ratio of 0\PYZsq{}s and 1\PYZsq{}s in the labels selected by \PYZsq{}indices\PYZsq{}}
+         \PY{l+s+sd}{    \PYZhy{} indices: 1D array for selected indices}
+         \PY{l+s+sd}{    \PYZhy{} labels: an array of 0s and 1s}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{filtered} \PY{o}{=} \PY{n}{labels}\PY{p}{[}\PY{n}{indices}\PY{p}{]}
+             \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{filtered}\PY{p}{,} \PY{n}{torch}\PY{o}{.}\PY{n}{Tensor}\PY{p}{)}\PY{p}{:} \PY{n}{filtered} \PY{o}{=} \PY{n}{filtered}\PY{o}{.}\PY{n}{numpy}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+             \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{filtered}\PY{p}{,} \PY{n+nb}{list} \PY{p}{)}\PY{p}{:} \PY{n}{filtered} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{filtered}\PY{p}{)}\PY{p}{;}
+                 
+             \PY{n+nb}{print}\PY{p}{(}\PY{p}{[}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{filtered}\PY{o}{==}\PY{n}{categories}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{categories}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             
+         \PY{k}{def} \PY{n+nf}{print\PYZus{}ratios}\PY{p}{(}\PY{n}{indices}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{categories}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}todo}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}check ratio of 0\PYZsq{}s and 1\PYZsq{}s in the labels selected by \PYZsq{}indices\PYZsq{}}
+         \PY{l+s+sd}{    \PYZhy{} indices: 1D array for selected indices}
+         \PY{l+s+sd}{    \PYZhy{} labels: an array of 0s and 1s}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{filtered} \PY{o}{=} \PY{n}{labels}\PY{p}{[}\PY{n}{indices}\PY{p}{]}
+             \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{filtered}\PY{p}{,} \PY{n}{torch}\PY{o}{.}\PY{n}{Tensor}\PY{p}{)}\PY{p}{:} \PY{n}{filtered} \PY{o}{=} \PY{n}{filtered}\PY{o}{.}\PY{n}{numpy}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+             \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{filtered}\PY{p}{,} \PY{n+nb}{list} \PY{p}{)}\PY{p}{:} \PY{n}{filtered} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{filtered}\PY{p}{)}\PY{p}{;}
+             \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{filtered}\PY{p}{)}
+                 
+             \PY{n+nb}{print}\PY{p}{(}\PY{p}{[}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{filtered}\PY{o}{==}\PY{n}{categories}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{n} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{categories}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{categories} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{dataset}\PY{o}{.}\PY{n}{targets}\PY{p}{)}
+         \PY{n}{print\PYZus{}ratios}\PY{p}{(}\PY{n}{train\PYZus{}dev\PYZus{}ids}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{categories}\PY{p}{)}
+         \PY{n}{print\PYZus{}ratios}\PY{p}{(}\PY{n}{test\PYZus{}ids}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{categories}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.373046875, 0.626953125]
+[0.3684210526315789, 0.631578947368421]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} partition train\PYZus{}ids into train\PYZus{}ids and dev\PYZus{}ids}
+         \PY{n}{train\PYZus{}dev\PYZus{}labels} \PY{o}{=} \PY{n}{labels}\PY{p}{[}\PY{n}{train\PYZus{}dev\PYZus{}ids}\PY{p}{]}
+         \PY{n}{indices} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}dev\PYZus{}ids}\PY{p}{)}\PY{p}{)}
+         \PY{n}{train\PYZus{}ids}\PY{p}{,} \PY{n}{dev\PYZus{}ids} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{indices}\PY{p}{,} 
+                                              \PY{n}{stratify}\PY{o}{=}\PY{n}{train\PYZus{}dev\PYZus{}labels}\PY{p}{,}
+                                              \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,}
+                                              \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{RSEED}\PY{p}{)}
+         \PY{n}{imax} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{train\PYZus{}ids}\PY{p}{,} \PY{n}{dev\PYZus{}ids}\PY{p}{)}\PY{p}{)}
+         \PY{n}{imin} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{train\PYZus{}ids}\PY{p}{,} \PY{n}{dev\PYZus{}ids}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{min and max indices should corresponds to 0 and }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{len(train\PYZus{}dev\PYZus{}labels)\PYZhy{}1\PYZcb{}: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{imin, imax\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} map it back to index to (the original) y}
+         \PY{n}{train\PYZus{}ids} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{train\PYZus{}dev\PYZus{}ids}\PY{p}{)}\PY{p}{[}\PY{n}{train\PYZus{}ids}\PY{p}{]}
+         \PY{n}{dev\PYZus{}ids} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{train\PYZus{}dev\PYZus{}ids}\PY{p}{)}\PY{p}{[}\PY{n}{dev\PYZus{}ids}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} make test\PYZus{}ids also a np array}
+         \PY{n}{test\PYZus{}ids} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{test\PYZus{}ids}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+min and max indices should corresponds to 0 and 511: (3, 511)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} check ratios}
+         \PY{k}{for} \PY{n}{index\PYZus{}array} \PY{o+ow}{in} \PY{p}{[}\PY{n}{train\PYZus{}ids}\PY{p}{,} \PY{n}{dev\PYZus{}ids}\PY{p}{,} \PY{n}{test\PYZus{}ids}\PY{p}{]}\PY{p}{:}
+             \PY{n}{print\PYZus{}ratios}\PY{p}{(}\PY{n}{index\PYZus{}array}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{categories}\PY{p}{)}
+             
+                 
+         \PY{c+c1}{\PYZsh{} intersection check}
+         \PY{n}{s1} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{train\PYZus{}ids}\PY{p}{)}\PY{p}{;} \PY{n}{s2} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{dev\PYZus{}ids}\PY{p}{)}\PY{p}{;} \PY{n}{s3} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{test\PYZus{}ids}\PY{p}{)}
+         \PY{k}{assert}\PY{p}{(} \PY{n+nb}{len}\PY{p}{(}\PY{n}{s1}\PY{o}{.}\PY{n}{intersection}\PY{p}{(}\PY{n}{s2}\PY{p}{)}\PY{o}{.}\PY{n}{intersection}\PY{p}{(}\PY{n}{s3}\PY{p}{)}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.3740831295843521, 0.6259168704156479]
+[0.36893203883495146, 0.6310679611650486]
+[0.3684210526315789, 0.631578947368421]
+
+    \end{Verbatim}
+
+    Train, Dev, Test sizes
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n+nb}{print}\PY{p}{(}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ids}\PY{p}{)} \PY{k}{for} \PY{n}{ids} \PY{o+ow}{in} \PY{p}{[}\PY{n}{train\PYZus{}ids}\PY{p}{,} \PY{n}{dev\PYZus{}ids}\PY{p}{,} \PY{n}{test\PYZus{}ids}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[409, 103, 57]
+
+    \end{Verbatim}
+
+    Woohoo!
+
+    \hypertarget{define-luna-dataset-and-dataloader-objects}{%
+\subsubsection{Define Luna dataset and dataloader
+objects}\label{define-luna-dataset-and-dataloader-objects}}
+
+    First, define a transformation from numpy -\textgreater{}
+torch.FloatTensor
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k}{class} \PY{n+nc}{npToFloatTensor}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{pass}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}call\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{sample}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{datum}\PY{p}{,} \PY{n}{target}\PY{p}{,} \PY{n}{idx} \PY{o}{=} \PY{n}{sample} \PY{c+c1}{\PYZsh{}np.ndarray, an integer, idx to \PYZus{}\PYZus{}getitem\PYZus{}\PYZus{} of Dataset}
+         \PY{c+c1}{\PYZsh{}         pdb.set\PYZus{}trace()}
+                 
+                 \PY{n}{datum} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{from\PYZus{}numpy}\PY{p}{(}\PY{n}{datum}\PY{p}{)}\PY{o}{.}\PY{n}{type}\PY{p}{(}\PY{n}{torch}\PY{o}{.}\PY{n}{float}\PY{p}{)} \PY{c+c1}{\PYZsh{}float32}
+                 
+                 \PY{c+c1}{\PYZsh{} BCLoss takes in both int and float tensor}
+                 \PY{c+c1}{\PYZsh{} CrossEntropyLoss requires target to be LongTensor, ie. int}
+                 \PY{n}{target} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{tensor}\PY{p}{(}\PY{n}{target}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{torch}\PY{o}{.}\PY{n}{float}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}todo: to int?}
+                 \PY{k}{return} \PY{p}{(}\PY{n}{datum}\PY{p}{,} \PY{n}{target}\PY{p}{,} \PY{n}{idx}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{partition} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{train\PYZus{}ids}\PY{p}{,} 
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dev}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{dev\PYZus{}ids}\PY{p}{,} 
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{test\PYZus{}ids}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} train\PYZus{}dataset = LunaPickleDataset(fpath, }
+         \PY{c+c1}{\PYZsh{}                                   partition[\PYZsq{}train\PYZsq{}], }
+         \PY{c+c1}{\PYZsh{}                                   root\PYZus{}dir=ROOT,}
+         \PY{c+c1}{\PYZsh{}                                   transform=npToFloatTensor()}
+         \PY{c+c1}{\PYZsh{}                                  )}
+         \PY{c+c1}{\PYZsh{} dev\PYZus{}dataset = LunaPickleDataset(fpath, }
+         \PY{c+c1}{\PYZsh{}                                 partition[\PYZsq{}dev\PYZsq{}],}
+         \PY{c+c1}{\PYZsh{}                                 root\PYZus{}dir=ROOT,}
+         \PY{c+c1}{\PYZsh{}                                 transform=npToFloatTensor())}
+         
+         \PY{c+c1}{\PYZsh{} test\PYZus{}dataset = LunaPickleDataset(fpath, }
+         \PY{c+c1}{\PYZsh{}                                  partition[\PYZsq{}test\PYZsq{}], }
+         \PY{c+c1}{\PYZsh{}                                  root\PYZus{}dir=ROOT,}
+         \PY{c+c1}{\PYZsh{}                                  transform=npToFloatTensor())}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{train\PYZus{}dataset} \PY{o}{=} \PY{n}{CancerDataset}\PY{p}{(}\PY{n}{cancer\PYZus{}xy}\PY{p}{,} 
+                                       \PY{n}{partition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                       \PY{n}{transform}\PY{o}{=}\PY{n}{npToFloatTensor}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{dev\PYZus{}dataset} \PY{o}{=} \PY{n}{CancerDataset}\PY{p}{(}\PY{n}{cancer\PYZus{}xy}\PY{p}{,} 
+                                     \PY{n}{partition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dev}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                     \PY{n}{transform}\PY{o}{=}\PY{n}{npToFloatTensor}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{test\PYZus{}dataset} \PY{o}{=} \PY{n}{CancerDataset}\PY{p}{(}\PY{n}{cancer\PYZus{}xy}\PY{p}{,} 
+                                     \PY{n}{partition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                     \PY{n}{transform}\PY{o}{=}\PY{n}{npToFloatTensor}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{dev\PYZus{}dataset}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} (tensor([ 1.3690e+01,  1.6070e+01,  8.7840e+01,  5.7910e+02,  8.3020e-02,
+                   6.3740e-02,  2.5560e-02,  2.0310e-02,  1.8720e-01,  5.6690e-02,
+                   1.7050e-01,  5.0660e-01,  1.3720e+00,  1.4000e+01,  4.2300e-03,
+                   1.5870e-02,  1.1690e-02,  6.3350e-03,  1.9430e-02,  2.1770e-03,
+                   1.4840e+01,  2.0210e+01,  9.9160e+01,  6.7060e+02,  1.1050e-01,
+                   2.0960e-01,  1.3460e-01,  6.9870e-02,  3.3230e-01,  7.7010e-02]),
+          tensor(1.),
+          0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{}2. new dataloader instance}
+         \PY{n}{data\PYZus{}params} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{batch\PYZus{}size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{32}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{shuffle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{k+kc}{True}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}workers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{\PYZcb{}}
+         \PY{n}{train\PYZus{}loader} \PY{o}{=} \PY{n}{DataLoader}\PY{p}{(}\PY{n}{dataset}\PY{o}{=}\PY{n}{train\PYZus{}dataset}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{data\PYZus{}params}\PY{p}{)}
+         \PY{n}{heavy\PYZus{}train\PYZus{}loader} \PY{o}{=} \PY{n}{DataLoader}\PY{p}{(}\PY{n}{dataset}\PY{o}{=}\PY{n}{train\PYZus{}dataset}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}ids}\PY{p}{)}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} train\PYZus{}loader = DataLoader(dataset=train\PYZus{}dataset, batch\PYZus{}size=len(train\PYZus{}ids), shuffle=True)}
+         \PY{n}{dev\PYZus{}loader} \PY{o}{=} \PY{n}{DataLoader}\PY{p}{(}\PY{n}{dataset}\PY{o}{=}\PY{n}{dev\PYZus{}dataset}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dev\PYZus{}ids}\PY{p}{)}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{test\PYZus{}loader} \PY{o}{=} \PY{n}{DataLoader}\PY{p}{(}\PY{n}{dataset}\PY{o}{=}\PY{n}{test\PYZus{}dataset}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}ids}\PY{p}{)}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{test-loaders}{%
+\paragraph{Test loaders}\label{test-loaders}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k}{for} \PY{n}{loader} \PY{o+ow}{in} \PY{p}{[}\PY{n}{train\PYZus{}loader}\PY{p}{,} \PY{n}{dev\PYZus{}loader}\PY{p}{,} \PY{n}{test\PYZus{}loader} \PY{p}{]}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num of cycles: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{loader}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}     dataiter = iter(loader)}
+         \PY{c+c1}{\PYZsh{}     print(\PYZsq{}dtype: \PYZsq{}, type(dataiter.next()[0][0]))}
+         \PY{c+c1}{\PYZsh{}     print(dataiter.next())}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+num of cycles:  13
+num of cycles:  1
+num of cycles:  1
+
+    \end{Verbatim}
+
+    Ready!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} Wrong way to set initial weights }
+         \PY{c+c1}{\PYZsh{} because no inplace functions are allowed for Variables with\PYZsq{}requires\PYZus{}grad=True\PYZsq{}}
+         \PY{c+c1}{\PYZsh{} Ref: https://discuss.pytorch.org/t/how\PYZhy{}to\PYZhy{}initiate\PYZhy{}parameters\PYZhy{}of\PYZhy{}layers/1460}
+         \PY{k}{def} \PY{n+nf}{wrong\PYZus{}weight\PYZus{}init}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{torch}\PY{o}{.}\PY{n}{manual\PYZus{}seed}\PY{p}{(}\PY{n}{RSEED}\PY{p}{)}
+                 \PY{n}{m}\PY{o}{.}\PY{n}{weight}\PY{o}{.}\PY{n}{normal\PYZus{}}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} error! }
+                 \PY{n}{m}\PY{o}{.}\PY{n}{bias}\PY{o}{.}\PY{n}{normal\PYZus{}}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} error!}
+                 
+         \PY{k}{def} \PY{n+nf}{weight\PYZus{}init}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{torch}\PY{o}{.}\PY{n}{manual\PYZus{}seed}\PY{p}{(}\PY{n}{RSEED}\PY{p}{)}
+                 \PY{n}{m}\PY{o}{.}\PY{n}{weight}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{normal\PYZus{}}\PY{p}{(}\PY{p}{)} 
+                 \PY{n}{m}\PY{o}{.}\PY{n}{bias}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{normal\PYZus{}}\PY{p}{(}\PY{p}{)} 
+                     \PY{c+c1}{\PYZsh{}alternatively set initial bias to zero}
+                     \PY{c+c1}{\PYZsh{} m.bias.data.fill\PYZus{}(0)}
+                 
+\end{Verbatim}
+
+
+    \hypertarget{try-a-deeper-network}{%
+\subsection{3. Try a deeper network}\label{try-a-deeper-network}}
+
+    Simple batch norm layer
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{N}\PY{p}{,}\PY{n}{D} \PY{o}{=}  \PY{n}{train\PYZus{}dataset}\PY{o}{.}\PY{n}{len}\PY{p}{,} \PY{n}{train\PYZus{}dataset}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{criterion} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{BCELoss}\PY{p}{(}\PY{n}{size\PYZus{}average}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{k}{class} \PY{n+nc}{DeepBCModel}\PY{p}{(}\PY{n}{nn}\PY{o}{.}\PY{n}{Module}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{dims}\PY{p}{,} 
+                          \PY{n}{hidden\PYZus{}activation}\PY{o}{=}\PY{n}{nn}\PY{o}{.}\PY{n}{ReLU}\PY{p}{(}\PY{p}{)}\PY{p}{,} 
+                          \PY{n}{output\PYZus{}activation}\PY{o}{=}\PY{n}{nn}\PY{o}{.}\PY{n}{Sigmoid}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        dims: a list of dimensions of layer. [inDims, H1, H2,...].}
+         \PY{l+s+sd}{        It doesn\PYZsq{}t include the output layer\PYZsq{}s size, which is fixed to 1\PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n+nb}{super}\PY{p}{(}\PY{n}{DeepBCModel}\PY{p}{,}\PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+                 
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}build\PYZus{}layers\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{dims}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n\PYZus{}layers} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{dims}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n\PYZus{}batch\PYZus{}norms} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n\PYZus{}layers} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} Q:don\PYZsq{}t need for the last layer(right before softmax)}
+                 
+         \PY{c+c1}{\PYZsh{}         self.batch\PYZus{}norm = nn.BatchNorm1d() \PYZsh{}todo}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{h\PYZus{}activation} \PY{o}{=} \PY{n}{hidden\PYZus{}activation}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}activation} \PY{o}{=} \PY{n}{output\PYZus{}activation}
+                 
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}build\PYZus{}layers\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{dims}\PY{p}{)}\PY{p}{:}
+         \PY{c+c1}{\PYZsh{}         assert(len(self.layers) == 0)}
+         \PY{c+c1}{\PYZsh{}         for i in range(len(dims)\PYZhy{}1):}
+         \PY{c+c1}{\PYZsh{}             self.add\PYZus{}module(f\PYZsq{}h\PYZob{}i\PYZcb{}\PYZsq{}, self.h\PYZus{}activation(nn.Linear(dims[i],dim[i+1])))}
+         \PY{c+c1}{\PYZsh{}         self.add\PYZus{}module(f\PYZsq{}h\PYZob{}len(dim)\PYZhy{}1\PYZcb{}\PYZsq{}, self.o\PYZus{}activation(nn.Linear(dims[\PYZhy{}1],1)))}
+                                     
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dims}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}module}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{li}\PY{l+s+si}{\PYZob{}i\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{(}\PY{n}{dims}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{dims}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}module}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bn}\PY{l+s+si}{\PYZob{}i\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nn}\PY{o}{.}\PY{n}{BatchNorm1d}\PY{p}{(}\PY{n}{dims}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}module}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{li}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{len(dims)\PYZhy{}1\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{(}\PY{n}{dims}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                 
+         \PY{c+c1}{\PYZsh{}     def forward(self, x):}
+         \PY{c+c1}{\PYZsh{}         y\PYZus{}pred = x}
+                 
+         \PY{c+c1}{\PYZsh{}         for (mname, m) in self.named\PYZus{}children():}
+         \PY{c+c1}{\PYZsh{}             if not isinstance(m, nn.Linear):}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}                 print(mname, \PYZsq{}: pass\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}                 continue}
+                     
+         \PY{c+c1}{\PYZsh{}             if (str(self.n\PYZus{}layers\PYZhy{}1) in mname):}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}                 print(mname, \PYZsq{}: last layer\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}                 act = self.o\PYZus{}activation}
+         \PY{c+c1}{\PYZsh{}             else:}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}                 print(mname, \PYZdq{}: middle layer\PYZdq{} )}
+         \PY{c+c1}{\PYZsh{}                 act = lambda x: nn.BatchNorm1d()(x)self.h\PYZus{}activation(nn.BatchNorm1d())}
+                         
+         \PY{c+c1}{\PYZsh{}             y\PYZus{}pred = act(m(y\PYZus{}pred))}
+         \PY{c+c1}{\PYZsh{}         return y\PYZus{}pred}
+             \PY{k}{def} \PY{n+nf}{forward}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{x}
+         
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n\PYZus{}layers} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{}exclude the last weight}
+                     \PY{n}{li} \PY{o}{=} \PY{n+nb}{getattr}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{li}\PY{l+s+si}{\PYZob{}i\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                     \PY{n}{bn} \PY{o}{=} \PY{n+nb}{getattr}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bn}\PY{l+s+si}{\PYZob{}i\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                     \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{h\PYZus{}activation}\PY{p}{(}\PY{n}{bn}\PY{p}{(}\PY{n}{li}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n}{li} \PY{o}{=} \PY{n+nb}{getattr}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{li}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{self.n\PYZus{}layers\PYZhy{}1\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}activation}\PY{p}{(}\PY{n}{li}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{k}{return} \PY{n}{y\PYZus{}pred}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}train\PYZus{}loss}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{criterion}\PY{p}{,} \PY{n}{train\PYZus{}dataset}\PY{p}{,} \PY{n}{exclude\PYZus{}indices}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Compute loss on training dataset except data indexed at}
+         \PY{l+s+sd}{    exclude\PYZus{}indices.}
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{    \PYZhy{} model: trained model with forward function}
+         \PY{l+s+sd}{    \PYZhy{} criterion: loss function that takes in (ypred, y)}
+         \PY{l+s+sd}{    \PYZhy{} train\PYZus{}dataset (Dataset): training dataset }
+         \PY{l+s+sd}{    \PYZhy{} exclude\PYZus{}indices: indices to exclude from train\PYZus{}dataset }
+         \PY{l+s+sd}{        when computing the loss, eg: batch indices used to }
+         \PY{l+s+sd}{        fit the current model}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}dataset}\PY{p}{)}
+             \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{exclude\PYZus{}indices}\PY{p}{,} \PY{n}{torch}\PY{o}{.}\PY{n}{Tensor}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{exclude\PYZus{}indices} \PY{o}{=} \PY{n}{exclude\PYZus{}indices}\PY{o}{.}\PY{n}{numpy}\PY{p}{(}\PY{p}{)}
+             \PY{n}{include\PYZus{}indices} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{k}{if} \PY{n}{i} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{exclude\PYZus{}indices}\PY{p}{]}
+             \PY{n}{samples} \PY{o}{=} \PY{n}{train\PYZus{}dataset}\PY{p}{[}\PY{n}{include\PYZus{}indices}\PY{p}{]}
+             \PY{n}{x} \PY{o}{=} \PY{n}{samples}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{y} \PY{o}{=} \PY{n}{samples}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}     pdb.set\PYZus{}trace()}
+         \PY{c+c1}{\PYZsh{}     x\PYZus{}tensor = torch.tensor(x)}
+         \PY{c+c1}{\PYZsh{}     y\PYZus{}tensor = torch.stack(y)}
+         \PY{c+c1}{\PYZsh{}     pdb.set\PYZus{}trace()}
+             \PY{k}{with} \PY{n}{torch}\PY{o}{.}\PY{n}{no\PYZus{}grad}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{ypred} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{.}\PY{n}{type\PYZus{}as}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+                 \PY{n}{loss} \PY{o}{=} \PY{n}{criterion}\PY{p}{(}\PY{n}{ypred}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+             \PY{k}{return} \PY{n}{loss}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}loss\PYZus{}on\PYZus{}entire\PYZus{}dataset}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{criterion}\PY{p}{,} \PY{n}{loader}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Assumes dataset has a batch\PYZus{}size == len(dataset),}
+         \PY{l+s+sd}{    ie. one iter results in iterating the entire dataset.\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{loader}\PY{o}{.}\PY{n}{dataset}\PY{p}{)}
+             \PY{k}{assert}\PY{p}{(}\PY{n}{n} \PY{o}{==} \PY{n}{loader}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{}     print(model.li4.bias[:10])}
+         \PY{c+c1}{\PYZsh{}             pdb.set\PYZus{}trace()}
+         
+             \PY{k}{with} \PY{n}{torch}\PY{o}{.}\PY{n}{no\PYZus{}grad}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{loss} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n}{acc} \PY{o}{=} \PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{}general acc}
+                 \PY{n}{hit\PYZus{}accs} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{}acc per label}
+         
+                 \PY{k}{for} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n}{loader}\PY{p}{:}
+                     \PY{n}{ypred} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{type\PYZus{}as}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+                     \PY{n}{loss} \PY{o}{=} \PY{n}{criterion}\PY{p}{(}\PY{n}{ypred}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+                     
+                     \PY{c+c1}{\PYZsh{} make a decision at 0.5}
+                     \PY{c+c1}{\PYZsh{} boolean tensor is uint8 type. Cast it to tensor.float32}
+                     \PY{n}{decision} \PY{o}{=} \PY{p}{(}\PY{n}{ypred} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{type}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{dtype}\PY{p}{)}
+                     \PY{n}{isCorrect} \PY{o}{=} \PY{p}{(}\PY{n}{decision}\PY{o}{==}\PY{n}{y}\PY{p}{)}\PY{o}{.}\PY{n}{numpy}\PY{p}{(}\PY{p}{)}
+                     \PY{n}{acc} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{isCorrect}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{isCorrect}\PY{p}{)}
+         
+                     \PY{c+c1}{\PYZsh{} 0\PYZhy{}\PYZgt{}0 accuracy, 1\PYZhy{}\PYZgt{}1 accuracy}
+                     \PY{k}{for} \PY{n}{label} \PY{o+ow}{in} \PY{n}{y}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{hit\PYZus{}count} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{k}{if} \PY{n}{decision}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{==}\PY{n}{label} \PY{o+ow}{and} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{==}\PY{n}{label}\PY{p}{]}
+                         \PY{n}{hit\PYZus{}acc} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{hit\PYZus{}count}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{y}\PY{o}{==}\PY{n}{label}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}sum(y==label).item()}
+                         \PY{n}{hit\PYZus{}accs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{hit\PYZus{}acc}\PY{p}{)}
+             \PY{k}{return} \PY{p}{[}\PY{n}{loss}\PY{p}{,} \PY{n}{acc}\PY{p}{,} \PY{n}{hit\PYZus{}accs}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{k}{def} \PY{n+nf}{show\PYZus{}weights}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} visualize weights}
+             \PY{n}{n} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{n\PYZus{}layers}
+         \PY{c+c1}{\PYZsh{}     pdb.set\PYZus{}trace()}
+             \PY{n}{nrows} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{floor}\PY{p}{(}\PY{n}{n}\PY{o}{/}\PY{n}{ncols}\PY{p}{)}\PY{p}{)}
+             \PY{n}{f}\PY{p}{,}\PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{p}{,} \PY{n}{ncols}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{n}{figsize}\PY{p}{)}
+             \PY{n}{axes} \PY{o}{=} \PY{n}{axes}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}
+             
+             \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{mname}\PY{p}{,}\PY{n}{m} \PY{o+ow}{in} \PY{n}{model}\PY{o}{.}\PY{n}{named\PYZus{}children}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{w} \PY{o}{=} \PY{n}{m}\PY{o}{.}\PY{n}{weight}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{numpy}\PY{p}{(}\PY{p}{)}
+                     \PY{k}{if} \PY{n}{w}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1} \PY{o+ow}{or} \PY{n}{w}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                         \PY{n}{w} \PY{o}{=} \PY{n}{w}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         
+                     \PY{n+nb}{print} \PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}mname\PYZcb{}}\PY{l+s+s1}{: }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{w.min(), w.max()\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n}{axes}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{mname}\PY{p}{)}
+                     \PY{n}{axes}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n}{axes}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+                     \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  Test DeepBCModel constructor
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{N}\PY{p}{,}\PY{n}{D} \PY{o}{=}  \PY{n}{train\PYZus{}dataset}\PY{o}{.}\PY{n}{len}\PY{p}{,} \PY{n}{train\PYZus{}dataset}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{n}{dims} \PY{o}{=} \PY{p}{[}\PY{n}{D}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{]}
+         \PY{n}{M} \PY{o}{=} \PY{n}{DeepBCModel}\PY{p}{(}\PY{n}{dims}\PY{p}{)}
+         \PY{n}{criterion} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{BCELoss}\PY{p}{(}\PY{n}{size\PYZus{}average}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{M}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{M}\PY{o}{.}\PY{n}{n\PYZus{}layers}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+DeepBCModel(
+  (li0): Linear(in\_features=30, out\_features=200, bias=True)
+  (bn0): BatchNorm1d(200, eps=1e-05, momentum=0.1, affine=True, track\_running\_stats=True)
+  (li1): Linear(in\_features=200, out\_features=200, bias=True)
+  (bn1): BatchNorm1d(200, eps=1e-05, momentum=0.1, affine=True, track\_running\_stats=True)
+  (li2): Linear(in\_features=200, out\_features=200, bias=True)
+  (bn2): BatchNorm1d(200, eps=1e-05, momentum=0.1, affine=True, track\_running\_stats=True)
+  (li3): Linear(in\_features=200, out\_features=1, bias=True)
+  (h\_activation): ReLU()
+  (o\_activation): Sigmoid()
+)
+4
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k}{for} \PY{n}{m} \PY{o+ow}{in} \PY{n}{M}\PY{o}{.}\PY{n}{children}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Linear(in\_features=30, out\_features=200, bias=True)
+BatchNorm1d(200, eps=1e-05, momentum=0.1, affine=True, track\_running\_stats=True)
+Linear(in\_features=200, out\_features=200, bias=True)
+BatchNorm1d(200, eps=1e-05, momentum=0.1, affine=True, track\_running\_stats=True)
+Linear(in\_features=200, out\_features=200, bias=True)
+BatchNorm1d(200, eps=1e-05, momentum=0.1, affine=True, track\_running\_stats=True)
+Linear(in\_features=200, out\_features=1, bias=True)
+ReLU()
+Sigmoid()
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} check forward function}
+         \PY{n}{dataiter} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{train\PYZus{}loader}\PY{p}{)}
+         \PY{n}{x1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{idx} \PY{o}{=} \PY{n}{dataiter}\PY{o}{.}\PY{n}{next}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{M}\PY{p}{(}\PY{n}{x1}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  Test get\_train\_loss
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{excludes} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{32}\PY{p}{)}
+         \PY{n}{get\PYZus{}train\PYZus{}loss}\PY{p}{(}\PY{n}{M}\PY{p}{,} \PY{n}{criterion}\PY{p}{,} \PY{n}{train\PYZus{}dataset}\PY{p}{,} \PY{n}{excludes}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/root/anaconda3/envs/fastai/lib/python3.6/site-packages/torch/nn/functional.py:1474: UserWarning: Using a target size (torch.Size([377])) that is different to the input size (torch.Size([377, 1])) is deprecated. Please ensure they have the same size.
+  "Please ensure they have the same size.".format(target.size(), input.size()))
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} 0.7002192735671997
+\end{Verbatim}
+            
+    \hypertarget{experiments}{%
+\subsubsection{Experiments}\label{experiments}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} Hyperparameters}
+         \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.0001}
+         \PY{n}{nEpoch} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{n}{H1} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{;} \PY{n}{H2} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{;}\PY{c+c1}{\PYZsh{} H3 = 50; H4 = 50}
+         \PY{n}{dims} \PY{o}{=} \PY{p}{[}\PY{n}{D}\PY{p}{,} \PY{n}{H1}\PY{p}{,} \PY{n}{H2}\PY{p}{]}\PY{c+c1}{\PYZsh{}, H3, H4]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ion}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} turn on interactive mode}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{model} \PY{o}{=} \PY{n}{DeepBCModel}\PY{p}{(}\PY{n}{dims}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{weight\PYZus{}init}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:} DeepBCModel(
+           (li0): Linear(in\_features=30, out\_features=100, bias=True)
+           (bn0): BatchNorm1d(100, eps=1e-05, momentum=0.1, affine=True, track\_running\_stats=True)
+           (li1): Linear(in\_features=100, out\_features=100, bias=True)
+           (bn1): BatchNorm1d(100, eps=1e-05, momentum=0.1, affine=True, track\_running\_stats=True)
+           (li2): Linear(in\_features=100, out\_features=1, bias=True)
+           (h\_activation): ReLU()
+           (o\_activation): Sigmoid()
+         )
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} visualize first layer\PYZsq{}s initial weight}
+         \PY{n}{show\PYZus{}weights}\PY{p}{(}\PY{n}{model}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+li0: (-3.4707286, 3.6032736)
+li1: (-3.58521, 3.6032736)
+li2: (-2.0597744, 2.995054)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{optimizer} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{optim}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{parameters}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{n}{learning\PYZus{}rate}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{save-and-load-model}{%
+\subsubsection{Save and load model}\label{save-and-load-model}}
+
+See \href{http://bit.ly/2uo4zt9}{sor},
+\href{http://bit.ly/2zrvTg1}{pytorch forum} 1. Save
+
+\begin{verbatim}
+torch.save(the_model.state_dict(), PATH)
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Load
+\end{enumerate}
+
+\begin{verbatim}
+the_model = TheModelClass(*args, **kwargs)
+the_model.load_state_dict(torch.load(PATH))
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c+c1}{\PYZsh{} Train}
+         \PY{n}{debug} \PY{o}{=} \PY{k+kc}{False}
+         \PY{n}{verbose} \PY{o}{=} \PY{k+kc}{True}
+         
+         \PY{c+c1}{\PYZsh{} loss and acc from each batch (ie. per cycle)}
+         \PY{n}{batch\PYZus{}ls} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{train\PYZus{}ls} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{batch\PYZus{}accs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{batch\PYZus{}hit\PYZus{}accs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} loss and acc from each epoch (ie. per epoch)}
+         \PY{n}{dev\PYZus{}ls} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{dev\PYZus{}accs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{epoch\PYZus{}dev\PYZus{}hit\PYZus{}accs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{n}{epoch\PYZus{}train\PYZus{}ls} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{epoch} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nEpoch}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{p}{(}\PY{n}{epoch}\PY{o}{\PYZpc{}}\PY{k}{49} == 0): print(\PYZdq{}=\PYZdq{}*30); print(f\PYZsq{}epoch \PYZob{}epoch\PYZcb{}\PYZsq{})
+         
+             \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{p}{(}\PY{n}{x\PYZus{}batch}\PY{p}{,} \PY{n}{y\PYZus{}batch}\PY{p}{,} \PY{n}{i\PYZus{}batch}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{train\PYZus{}loader}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{debug}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{x\PYZus{}batch}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}batch}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{i\PYZus{}batch}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{pdb}\PY{o}{.}\PY{n}{set\PYZus{}trace}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{}forward}
+                 \PY{n}{ypred\PYZus{}batch} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{x\PYZus{}batch}\PY{p}{)}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{n}{y\PYZus{}batch}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}loss}
+                 \PY{n}{l} \PY{o}{=} \PY{n}{criterion}\PY{p}{(}\PY{n}{ypred\PYZus{}batch}\PY{p}{,} \PY{n}{y\PYZus{}batch}\PY{p}{)}
+                 \PY{n}{batch\PYZus{}ls}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{l}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}zero\PYZhy{}out grads}
+                 \PY{n}{optimizer}\PY{o}{.}\PY{n}{zero\PYZus{}grad}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{}backward pass}
+                 \PY{n}{l}\PY{o}{.}\PY{n}{backward}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{}update parameters}
+                 \PY{n}{optimizer}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{p}{)}
+                 
+                 \PY{k}{if} \PY{n}{debug}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{ypred\PYZus{}batch}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{ypred\PYZus{}batch}\PY{o}{.}\PY{n}{dtype}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}batch}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{y\PYZus{}batch}\PY{o}{.}\PY{n}{dtype}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{i\PYZus{}batch}\PY{p}{)}
+                     \PY{n}{pdb}\PY{o}{.}\PY{n}{set\PYZus{}trace}\PY{p}{(}\PY{p}{)}
+                     
+                 \PY{c+c1}{\PYZsh{} Compute training loss and accuracy}
+                 \PY{n}{train\PYZus{}l} \PY{o}{=} \PY{n}{get\PYZus{}train\PYZus{}loss}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{criterion}\PY{p}{,} \PY{n}{train\PYZus{}dataset}\PY{p}{,} \PY{n}{i\PYZus{}batch}\PY{p}{)}
+                 \PY{n}{train\PYZus{}ls}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{train\PYZus{}l}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} make a decision at 0.5}
+                 \PY{c+c1}{\PYZsh{} boolean tensor is uint8 type. Cast it to tensor.float32}
+                 \PY{n}{decision\PYZus{}batch} \PY{o}{=} \PY{p}{(}\PY{n}{ypred\PYZus{}batch} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{n}{y\PYZus{}batch}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{type}\PY{p}{(}\PY{n}{y\PYZus{}batch}\PY{o}{.}\PY{n}{dtype}\PY{p}{)}
+                 \PY{n}{isCorrect\PYZus{}batch} \PY{o}{=} \PY{p}{(}\PY{n}{decision\PYZus{}batch}\PY{o}{==}\PY{n}{y\PYZus{}batch}\PY{p}{)}\PY{o}{.}\PY{n}{numpy}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{batch\PYZus{}acc} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{isCorrect\PYZus{}batch}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{isCorrect\PYZus{}batch}\PY{p}{)}
+                 \PY{n}{batch\PYZus{}accs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{batch\PYZus{}acc}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} 0\PYZhy{}\PYZgt{}0 accuracy, 1\PYZhy{}\PYZgt{}1 accuracy}
+                 \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}batch}\PY{p}{)}
+                 \PY{n}{hit\PYZus{}accs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{k}{for} \PY{n}{label} \PY{o+ow}{in} \PY{n}{y\PYZus{}batch}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{hit\PYZus{}count} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{)} \PY{k}{if} \PY{n}{decision\PYZus{}batch}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{==}\PY{n}{label} \PY{o+ow}{and} \PY{n}{y\PYZus{}batch}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{==}\PY{n}{label}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}             pdb.set\PYZus{}trace()}
+                     \PY{n}{hit\PYZus{}acc} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{hit\PYZus{}count}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{y\PYZus{}batch}\PY{o}{==}\PY{n}{label}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}sum(y\PYZus{}batch==label).item()}
+                     \PY{n}{hit\PYZus{}accs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{hit\PYZus{}acc}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} collect hit\PYZus{}accs from each cycle}
+                 \PY{n}{batch\PYZus{}hit\PYZus{}accs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{hit\PYZus{}accs}\PY{p}{)}
+                 
+             \PY{c+c1}{\PYZsh{} Dev accuracy}
+             \PY{n}{epoch\PYZus{}train\PYZus{}l}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{get\PYZus{}loss\PYZus{}on\PYZus{}entire\PYZus{}dataset}\PY{p}{(}\PY{n}{model}\PY{p}{,} 
+                                                        \PY{n}{criterion}\PY{p}{,} 
+                                                        \PY{n}{loader}\PY{o}{=}\PY{n}{heavy\PYZus{}train\PYZus{}loader}\PY{p}{)}
+             
+             \PY{n}{dev\PYZus{}l}\PY{p}{,} \PY{n}{dev\PYZus{}acc}\PY{p}{,} \PY{n}{dev\PYZus{}hit\PYZus{}accs} \PY{o}{=} \PY{n}{get\PYZus{}loss\PYZus{}on\PYZus{}entire\PYZus{}dataset}\PY{p}{(}\PY{n}{model}\PY{p}{,} 
+                                                                       \PY{n}{criterion}\PY{p}{,} 
+                                                                       \PY{n}{loader}\PY{o}{=}\PY{n}{dev\PYZus{}loader}\PY{p}{)}
+             \PY{n}{dev\PYZus{}ls}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{dev\PYZus{}l}\PY{p}{)}
+             \PY{n}{dev\PYZus{}accs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{dev\PYZus{}acc}\PY{p}{)}
+             \PY{n}{epoch\PYZus{}dev\PYZus{}hit\PYZus{}accs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{dev\PYZus{}hit\PYZus{}accs}\PY{p}{)}
+             
+             \PY{n}{epoch\PYZus{}train\PYZus{}ls}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{epoch\PYZus{}train\PYZus{}l}\PY{p}{)}
+             
+             \PY{k}{if} \PY{p}{(}\PY{n}{verbose} \PY{o+ow}{and} \PY{n}{epoch}\PY{o}{\PYZpc{}}\PY{k}{49} == 0):
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train loss, acc: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{train\PYZus{}ls[\PYZhy{}1], batch\PYZus{}accs[\PYZhy{}1]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{epoch train loss: }\PY{l+s+si}{\PYZob{}epoch\PYZus{}train\PYZus{}ls[\PYZhy{}1]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dev loss, acc: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{dev\PYZus{}ls[\PYZhy{}1], dev\PYZus{}accs[\PYZhy{}1]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} visualize weights}
+                 \PY{n}{show\PYZus{}weights}\PY{p}{(}\PY{n}{model}\PY{p}{)}
+            
+             
+             \PY{c+c1}{\PYZsh{} todo: accuracy on all training dataset}
+         \PY{c+c1}{\PYZsh{} save current trained model}
+         \PY{k+kn}{from} \PY{n+nn}{time} \PY{k}{import} \PY{n}{gmtime}\PY{p}{,} \PY{n}{strftime}
+         
+         \PY{n}{outname} \PY{o}{=} \PY{n}{strftime}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y\PYZus{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{m\PYZus{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZus{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{H\PYZus{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{M}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{gmtime}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{torch}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{state\PYZus{}dict}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{ROOT}\PY{o}{/}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TrainedModel/breast\PYZus{}cancer\PYZus{}}\PY{l+s+si}{\PYZob{}outname\PYZcb{}}\PY{l+s+s1}{.pth.tar}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/root/anaconda3/envs/fastai/lib/python3.6/site-packages/torch/nn/functional.py:1474: UserWarning: Using a target size (torch.Size([377])) that is different to the input size (torch.Size([377, 1])) is deprecated. Please ensure they have the same size.
+  "Please ensure they have the same size.".format(target.size(), input.size()))
+/root/anaconda3/envs/fastai/lib/python3.6/site-packages/torch/nn/functional.py:1474: UserWarning: Using a target size (torch.Size([384])) that is different to the input size (torch.Size([384, 1])) is deprecated. Please ensure they have the same size.
+  "Please ensure they have the same size.".format(target.size(), input.size()))
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+train loss, acc: (1.0123251676559448, 0.6)
+epoch train loss: 1.0055686235427856
+dev loss, acc: (1.0306003093719482, 0.4854368932038835)
+li0: (-3.471787, 3.6042635)
+li1: (-3.5864377, 3.6020405)
+li2: (-2.0610645, 2.993766)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 49
+train loss, acc: (0.16890710592269897, 0.72)
+epoch train loss: 0.15856817364692688
+dev loss, acc: (0.17697282135486603, 0.9320388349514563)
+li0: (-3.4886687, 3.6235077)
+li1: (-3.602759, 3.5853932)
+li2: (-2.0792933, 2.9778774)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 98
+train loss, acc: (0.1327693611383438, 0.96)
+epoch train loss: 0.13264425098896027
+dev loss, acc: (0.15302804112434387, 0.941747572815534)
+li0: (-3.5012271, 3.638831)
+li1: (-3.6066349, 3.586727)
+li2: (-2.0814092, 2.975993)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 147
+train loss, acc: (0.12104735523462296, 0.96)
+epoch train loss: 0.11657220870256424
+dev loss, acc: (0.14614097774028778, 0.941747572815534)
+li0: (-3.5109138, 3.6518624)
+li1: (-3.6111486, 3.5864058)
+li2: (-2.0831056, 2.9744897)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 196
+train loss, acc: (0.10718715935945511, 1.0)
+epoch train loss: 0.10453614592552185
+dev loss, acc: (0.14277136325836182, 0.941747572815534)
+li0: (-3.520288, 3.6658235)
+li1: (-3.6134653, 3.5875156)
+li2: (-2.0853965, 2.9733686)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 245
+train loss, acc: (0.0970522090792656, 0.96)
+epoch train loss: 0.0964781865477562
+dev loss, acc: (0.13982684910297394, 0.9514563106796117)
+li0: (-3.5258176, 3.6814902)
+li1: (-3.6141865, 3.589366)
+li2: (-2.0870042, 2.9729295)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_13.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 294
+train loss, acc: (0.08935829997062683, 0.96)
+epoch train loss: 0.08984553068876266
+dev loss, acc: (0.13974297046661377, 0.941747572815534)
+li0: (-3.5332613, 3.6949532)
+li1: (-3.6145678, 3.590765)
+li2: (-2.0886476, 2.972327)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_15.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 343
+train loss, acc: (0.08441513031721115, 1.0)
+epoch train loss: 0.08439496159553528
+dev loss, acc: (0.14066793024539948, 0.941747572815534)
+li0: (-3.5337698, 3.7132387)
+li1: (-3.6134045, 3.592502)
+li2: (-2.090767, 2.972118)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_17.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 392
+train loss, acc: (0.07820731401443481, 0.96)
+epoch train loss: 0.07917382568120956
+dev loss, acc: (0.1442432552576065, 0.9514563106796117)
+li0: (-3.5327823, 3.727601)
+li1: (-3.6128654, 3.5960166)
+li2: (-2.0951138, 2.9707816)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_19.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 441
+train loss, acc: (0.07815708965063095, 1.0)
+epoch train loss: 0.07479992508888245
+dev loss, acc: (0.14345581829547882, 0.9514563106796117)
+li0: (-3.536547, 3.740092)
+li1: (-3.6142344, 3.5999722)
+li2: (-2.097103, 2.9708896)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_21.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 490
+train loss, acc: (0.07336161285638809, 0.96)
+epoch train loss: 0.07202696055173874
+dev loss, acc: (0.1443389654159546, 0.9514563106796117)
+li0: (-3.5678608, 3.7567413)
+li1: (-3.6126637, 3.6024854)
+li2: (-2.0991786, 2.9709992)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_23.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 539
+train loss, acc: (0.07025927305221558, 0.96)
+epoch train loss: 0.06989583373069763
+dev loss, acc: (0.14268873631954193, 0.9514563106796117)
+li0: (-3.5982246, 3.7674644)
+li1: (-3.612148, 3.6047728)
+li2: (-2.1021123, 2.9720762)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_25.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 588
+train loss, acc: (0.06876443326473236, 1.0)
+epoch train loss: 0.066895492374897
+dev loss, acc: (0.13980399072170258, 0.9611650485436893)
+li0: (-3.63082, 3.7758653)
+li1: (-3.6113403, 3.6068275)
+li2: (-2.1054685, 2.97279)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_27.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 637
+train loss, acc: (0.06075500324368477, 0.92)
+epoch train loss: 0.06545901298522949
+dev loss, acc: (0.13815386593341827, 0.9611650485436893)
+li0: (-3.6608646, 3.7851615)
+li1: (-3.6086, 3.6094832)
+li2: (-2.1075828, 2.9750142)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_29.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 686
+train loss, acc: (0.06503274291753769, 0.96)
+epoch train loss: 0.06482257694005966
+dev loss, acc: (0.14029480516910553, 0.9514563106796117)
+li0: (-3.691366, 3.791955)
+li1: (-3.6042984, 3.6118188)
+li2: (-2.1114314, 2.9768953)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_31.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 735
+train loss, acc: (0.06082911416888237, 0.96)
+epoch train loss: 0.06251763552427292
+dev loss, acc: (0.14349472522735596, 0.9514563106796117)
+li0: (-3.7252884, 3.7961862)
+li1: (-3.6042378, 3.6159737)
+li2: (-2.1109664, 2.9820745)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_33.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 784
+train loss, acc: (0.06082560494542122, 0.96)
+epoch train loss: 0.060977522283792496
+dev loss, acc: (0.1395721584558487, 0.9611650485436893)
+li0: (-3.7572875, 3.795476)
+li1: (-3.599758, 3.6172838)
+li2: (-2.113949, 2.9842894)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_35.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 833
+train loss, acc: (0.05986062064766884, 0.92)
+epoch train loss: 0.060517214238643646
+dev loss, acc: (0.1422610580921173, 0.9514563106796117)
+li0: (-3.7901123, 3.7979238)
+li1: (-3.5929527, 3.6207616)
+li2: (-2.1140435, 2.988649)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_37.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 882
+train loss, acc: (0.056321073323488235, 0.96)
+epoch train loss: 0.05762389674782753
+dev loss, acc: (0.13827615976333618, 0.9611650485436893)
+li0: (-3.818722, 3.7983482)
+li1: (-3.5899153, 3.6236193)
+li2: (-2.116624, 2.9938886)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_39.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 931
+train loss, acc: (0.056001003831624985, 0.96)
+epoch train loss: 0.05669413506984711
+dev loss, acc: (0.1399877667427063, 0.9514563106796117)
+li0: (-3.8484335, 3.7983363)
+li1: (-3.5839243, 3.6253676)
+li2: (-2.1184227, 2.9964278)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_41.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+==============================
+epoch 980
+train loss, acc: (0.058610737323760986, 1.0)
+epoch train loss: 0.056609105318784714
+dev loss, acc: (0.14436310529708862, 0.9514563106796117)
+li0: (-3.8757722, 3.7937763)
+li1: (-3.5810096, 3.6258366)
+li2: (-2.1190763, 3.0009282)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_43.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{f}\PY{p}{,}\PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+         \PY{n}{axes} \PY{o}{=} \PY{n}{axes}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}
+         \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{batch\PYZus{}ls}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{batch loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{train\PYZus{}ls}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{batch\PYZus{}accs}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train acc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{dev\PYZus{}ls}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dev loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}Devset error}
+         
+         \PY{k}{for} \PY{n}{ax} \PY{o+ow}{in} \PY{n}{axes}\PY{p}{:}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train batch losses: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{train\PYZus{}ls[0], train\PYZus{}ls[\PYZhy{}1]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train acc: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{batch\PYZus{}accs[0], batch\PYZus{}accs[\PYZhy{}1]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dev loss: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{dev\PYZus{}ls[0], dev\PYZus{}ls[\PYZhy{}1]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dev acc: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{dev\PYZus{}accs[0], dev\PYZus{}accs[\PYZhy{}1]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train batch losses: (1.1462252140045166, 0.05606045946478844)
+Train acc: (0.4375, 0.96)
+Dev loss: (1.0306003093719482, 0.1432301104068756)
+Dev acc: (0.4854368932038835, 0.9514563106796117)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_63_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Devset error
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{}Test loop}
+         \PY{c+c1}{\PYZsh{} test loss}
+         \PY{c+c1}{\PYZsh{} with torch.no\PYZus{}grad():}
+         \PY{c+c1}{\PYZsh{}     for i, (xtest, ytest, \PYZus{}) in enumerate(test\PYZus{}loader):}
+         \PY{c+c1}{\PYZsh{}         n\PYZus{}test = len(test\PYZus{}loader.dataset)}
+         \PY{c+c1}{\PYZsh{}         assert (n\PYZus{}test == test\PYZus{}loader.batch\PYZus{}size)}
+                 
+         \PY{c+c1}{\PYZsh{}         ypred = model(xtest).view(ytest.size())}
+         \PY{c+c1}{\PYZsh{}         test\PYZus{}l = criterion(ypred, ytest).item()}
+         
+         \PY{c+c1}{\PYZsh{}         \PYZsh{} make a decision at 0.5}
+         \PY{c+c1}{\PYZsh{}         decision = (ypred \PYZgt{} 0.5).type(ytest.dtype)}
+         \PY{c+c1}{\PYZsh{}         \PYZsh{} collect isCorrects}
+         \PY{c+c1}{\PYZsh{}         isCorrect = (decision==ytest).numpy()}
+         
+         
+         \PY{c+c1}{\PYZsh{}         print(\PYZsq{}test loss: \PYZsq{}, test\PYZus{}l)}
+         \PY{c+c1}{\PYZsh{}         print(\PYZsq{}acc: \PYZsq{}, test\PYZus{}hit\PYZus{}accs)}
+         
+         \PY{n}{test\PYZus{}l}\PY{p}{,} \PY{n}{test\PYZus{}acc}\PY{p}{,} \PY{n}{test\PYZus{}hit\PYZus{}accs} \PY{o}{=} \PY{n}{get\PYZus{}loss\PYZus{}on\PYZus{}entire\PYZus{}dataset}\PY{p}{(}\PY{n}{model}\PY{p}{,} 
+                                                                       \PY{n}{criterion}\PY{p}{,} 
+                                                                       \PY{n}{loader}\PY{o}{=}\PY{n}{test\PYZus{}loader}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test loss: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{test\PYZus{}l}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test acc: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{test\PYZus{}acc}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}hit\PYZus{}accs: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{test\PYZus{}hit\PYZus{}accs}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+test loss:  0.18106326460838318
+test acc:  0.9122807017543859
+test\_hit\_accs:  [0.9166666666666666, 0.9047619047619048]
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
